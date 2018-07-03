@@ -15,12 +15,10 @@
         <!-- メニュー -->
         <Menu>
             <MenuItem Header="ファイル(_F)">
-                <MenuItem x:Name="openMenu" Header="開く(_O)..."/>
+                <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="openMenu_Click"/>
+                <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)"/>
+                <MenuItem x:Name="saveMenu" Header="名前をつけて保存(_A)..."/>
                 <Separator/>
-                <MenuItem x:Name="exitMenu" Header="終了(_X)"/>
-            </MenuItem>
-            <MenuItem Header="編集(_E)" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                <MenuItem x:Name="clearMenu" Header="クリア(_C)"/>
                 <MenuItem x:Name="exitMenu" Header="終了(_X)" Click="ExitMenuClick"/>
             </MenuItem>
         </Menu>

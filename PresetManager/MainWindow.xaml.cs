@@ -26,6 +26,16 @@ namespace PresetManager
         }
 
         /// <summary>
+        /// プリセットを開く
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void openMenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
         /// メニューの終了をクリック
         /// </summary>
         /// <param name="sender"></param>
