@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using static System.Console;
 
 namespace PresetManager
 {
@@ -43,7 +46,39 @@ namespace PresetManager
         /// <param name="e"></param>
         private void openMenu_Click(object sender, RoutedEventArgs e)
         {
+            // ダイアログを開く
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            // フィルタ
+            dialog.Filter = "JSONファイル(*.json)|*.json";
+            dialog.FilterIndex = 1;
 
+            if(dialog.ShowDialog() == true)
+            {
+                this.IsEnabled = false;
+                readJson(dialog.FileName);
+                this.IsEnabled = true;
+            }
+
+        }
+
+        /// <summary>
+        /// JSONを読み込む
+        /// </summary>
+        /// <param name="filePath"></param>
+        private void readJson(string filePath)
+        {
+            var parser = new Microsoft.VisualBasic.FileIO.TextFieldParser(filePath, Encoding.UTF8);
+            using (parser)
+            {
+                var jsonStr = parser.ReadToEnd();
+
+                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonStr)))
+                using (var streamReader = new StreamReader(memoryStream))
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(List<Model.Preset>));
+                    var presets = serializer.ReadObject(memoryStream);
+                }
+            }
         }
 
         /// <summary>
