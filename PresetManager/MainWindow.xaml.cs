@@ -24,8 +24,15 @@ namespace PresetManager
         {
             InitializeComponent();
 
-            var presets = new List<Model.Preset>();
-            presets.Add(new Model.Preset { Title = "BBCF" });
+            var presets = new List<Model.Preset>
+            {
+                new Model.Preset {
+                    Title = "BBCF", Explain = "説明", Characters = new List<string>
+                    {
+                        "a"
+                    }
+                }
+            };
             titleListView.DataContext = presets;
         }
 
@@ -47,6 +54,18 @@ namespace PresetManager
         private void ExitMenuClick(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// タイトル一覧の行が選択されたときの処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void titleListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = (Model.Preset)titleListView.SelectedItem;
+            TitleField.Text = item.Title;
+            ExplainField.Text = item.Explain;
         }
     }
 }

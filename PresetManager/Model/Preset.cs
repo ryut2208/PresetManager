@@ -10,6 +10,6 @@ namespace PresetManager.Model
     {
         public string Title { get; set; }
         public string Explain { get; set; }
-        public string[] Characters { get; set; }
+        public List<string> Characters { get; set; }
     }
 }
