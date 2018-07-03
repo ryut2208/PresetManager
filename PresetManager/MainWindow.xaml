@@ -21,6 +21,7 @@
             </MenuItem>
             <MenuItem Header="編集(_E)" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <MenuItem x:Name="clearMenu" Header="クリア(_C)"/>
+                <MenuItem x:Name="exitMenu" Header="終了(_X)" Click="ExitMenuClick"/>
             </MenuItem>
         </Menu>
 

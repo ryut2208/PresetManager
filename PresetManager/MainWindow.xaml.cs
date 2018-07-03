@@ -24,5 +24,15 @@ namespace PresetManager
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// メニューの終了をクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitMenuClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
