@@ -23,20 +23,12 @@ namespace PresetManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Model.Preset> presets;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            var presets = new List<Model.Preset>
-            {
-                new Model.Preset {
-                    Title = "BBCF", Explain = "説明", Characters = new List<string>
-                    {
-                        "a"
-                    }
-                }
-            };
-            titleListView.DataContext = presets;
         }
 
         /// <summary>
@@ -76,9 +68,12 @@ namespace PresetManager
                 using (var streamReader = new StreamReader(memoryStream))
                 {
                     var serializer = new DataContractJsonSerializer(typeof(List<Model.Preset>));
-                    var presets = serializer.ReadObject(memoryStream);
+                    presets = (List<Model.Preset>)serializer.ReadObject(memoryStream);
                 }
             }
+            presets.Sort((lhs, rhs) => lhs.Title.CompareTo(rhs.Title));
+            // 読み込んだデータを反映させる
+            titleListView.DataContext = presets;
         }
 
         /// <summary>
