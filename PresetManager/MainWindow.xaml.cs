@@ -23,6 +23,10 @@ namespace PresetManager
         public MainWindow()
         {
             InitializeComponent();
+
+            var presets = new List<Model.Preset>();
+            presets.Add(new Model.Preset { Title = "BBCF" });
+            titleListView.DataContext = presets;
         }
 
         /// <summary>

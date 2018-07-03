@@ -31,7 +31,13 @@
             <!-- 左側 -->
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="既存タイトル"/>
-                <ListView />
+                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="タイトル" DisplayMemberBinding="{Binding Title}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
 
             <!-- 右側 -->
