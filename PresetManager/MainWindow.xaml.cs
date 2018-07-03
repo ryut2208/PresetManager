@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization.Json;
 using System.IO;
-using static System.Console;
 
 namespace PresetManager
 {
@@ -23,12 +24,11 @@ namespace PresetManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Model.Preset> presets;
+        ObservableCollection<Model.Preset> presets;
 
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         /// <summary>
@@ -44,13 +44,12 @@ namespace PresetManager
             dialog.Filter = "JSONファイル(*.json)|*.json";
             dialog.FilterIndex = 1;
 
-            if(dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)
             {
                 this.IsEnabled = false;
                 readJson(dialog.FileName);
                 this.IsEnabled = true;
             }
-
         }
 
         /// <summary>
@@ -67,11 +66,12 @@ namespace PresetManager
                 using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonStr)))
                 using (var streamReader = new StreamReader(memoryStream))
                 {
-                    var serializer = new DataContractJsonSerializer(typeof(List<Model.Preset>));
-                    presets = (List<Model.Preset>)serializer.ReadObject(memoryStream);
+                    var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Model.Preset>));
+                    presets = (ObservableCollection<Model.Preset>)serializer.ReadObject(memoryStream);
                 }
             }
-            presets.Sort((lhs, rhs) => lhs.Title.CompareTo(rhs.Title));
+            // TODO: ソート出来るようにする
+            // presets.Sort((lhs, rhs) => lhs.Title.CompareTo(rhs.Title));
             // 読み込んだデータを反映させる
             titleListView.DataContext = presets;
         }
@@ -96,6 +96,20 @@ namespace PresetManager
             var item = (Model.Preset)titleListView.SelectedItem;
             TitleField.Text = item.Title;
             ExplainField.Text = item.Explain;
+        }
+
+        /// <summary>
+        /// 新規タイトルの追加をクリックしたときの処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewTitleMenuClick(object sender, RoutedEventArgs e)
+        {
+            if (presets == null)
+            {
+                return;
+            }
+            presets.Add(new Model.Preset());
         }
     }
 }
