@@ -29,29 +29,33 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- 左側 -->
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="既存タイトル"/>
-                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" >
+            <DockPanel>
+                <TextBlock Text="既存タイトル" DockPanel.Dock="Top" Margin="4"/>
+                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" Margin="1">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="タイトル" DisplayMemberBinding="{Binding Title}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+            </DockPanel>
 
             <!-- 右側 -->
-            <StackPanel Grid.Column="2" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="タイトル"/>
-                    <TextBox Text="タイトル入力欄"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="キャラ"/>
-                    <TextBox Text="キャラ入力欄"/>
-                </StackPanel>
-                <ListView/>
-            </StackPanel>
+            <DockPanel Grid.Column="2">
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="タイトル" Margin="4"/>
+                    <TextBox Text="タイトル入力欄" Margin="4"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="説明" Margin="4"/>
+                    <TextBox Text="説明入力欄" Margin="4"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="キャラ" Margin="4"/>
+                    <TextBox Text="キャラ入力欄" Margin="4"/>
+                </DockPanel>
+                <ListView Margin="1"/>
+            </DockPanel>
         </Grid>
     </Grid>
 </Window>
