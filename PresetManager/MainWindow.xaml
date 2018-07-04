@@ -16,7 +16,7 @@
         <Menu>
             <MenuItem Header="ファイル(_F)">
                 <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="openMenu_Click"/>
-                <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)"/>
+                <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)" Click="OverwriteMenuClick"/>
                 <MenuItem x:Name="saveMenu" Header="名前をつけて保存(_A)..."/>
                 <Separator/>
                 <MenuItem x:Name="exitMenu" Header="終了(_X)" Click="ExitMenuClick"/>

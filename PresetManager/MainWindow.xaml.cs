@@ -25,6 +25,10 @@ namespace PresetManager
     public partial class MainWindow : Window
     {
         ObservableCollection<Model.Preset> presets;
+        /// <summary>
+        ///  読み込んだファイルのパス
+        /// </summary>
+        private string filePath;
 
         public MainWindow()
         {
@@ -58,6 +62,7 @@ namespace PresetManager
         /// <param name="filePath"></param>
         private void readJson(string filePath)
         {
+            this.filePath = filePath;
             var parser = new Microsoft.VisualBasic.FileIO.TextFieldParser(filePath, Encoding.UTF8);
             using (parser)
             {
@@ -110,6 +115,27 @@ namespace PresetManager
                 return;
             }
             presets.Add(new Model.Preset());
+        }
+
+        /// <summary>
+        /// 上書き保存をクリックしたときの処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OverwriteMenuClick(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(this.filePath))
+            {
+                return;
+            }
+            using (var memoryStream = new MemoryStream())
+            using (var streamReader = new StreamReader(memoryStream))
+            {
+                var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Model.Preset>));
+                serializer.WriteObject(memoryStream, presets);
+                var jsonStr = Encoding.UTF8.GetString(memoryStream.ToArray());
+                File.WriteAllText(filePath, jsonStr);
+            }
         }
     }
 }
