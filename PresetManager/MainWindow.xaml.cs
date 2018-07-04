@@ -43,10 +43,12 @@ namespace PresetManager
         private void OpenMenuClick(object sender, RoutedEventArgs e)
         {
             // ダイアログを開く
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            // フィルタ
-            dialog.Filter = "JSONファイル(*.json)|*.json";
-            dialog.FilterIndex = 1;
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                // フィルタ
+                Filter = "JSONファイル(*.json)|*.json",
+                FilterIndex = 1
+            };
 
             if (dialog.ShowDialog() == true)
             {
