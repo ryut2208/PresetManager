@@ -40,7 +40,7 @@ namespace PresetManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void openMenu_Click(object sender, RoutedEventArgs e)
+        private void OpenMenuClick(object sender, RoutedEventArgs e)
         {
             // ダイアログを開く
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -51,7 +51,7 @@ namespace PresetManager
             if (dialog.ShowDialog() == true)
             {
                 this.IsEnabled = false;
-                readJson(dialog.FileName);
+                ReadJson(dialog.FileName);
                 this.IsEnabled = true;
             }
         }
@@ -60,7 +60,7 @@ namespace PresetManager
         /// JSONを読み込む
         /// </summary>
         /// <param name="filePath"></param>
-        private void readJson(string filePath)
+        private void ReadJson(string filePath)
         {
             this.filePath = filePath;
             var parser = new Microsoft.VisualBasic.FileIO.TextFieldParser(filePath, Encoding.UTF8);
@@ -96,7 +96,7 @@ namespace PresetManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void titleListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TitleListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var item = (Model.Preset)titleListView.SelectedItem;
             TitleField.Text = item.Title;

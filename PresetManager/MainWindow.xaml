@@ -15,9 +15,11 @@
         <!-- メニュー -->
         <Menu>
             <MenuItem Header="ファイル(_F)">
-                <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="openMenu_Click"/>
+                <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="OpenMenuClick"/>
                 <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)" Click="OverwriteMenuClick"/>
                 <MenuItem x:Name="saveMenu" Header="名前をつけて保存(_A)..."/>
+                <Separator/>
+                <MenuItem x:Name="newTitleMenu" Header="新規タイトル追加" Click="NewTitleMenuClick"/>
                 <Separator/>
                 <MenuItem x:Name="exitMenu" Header="終了(_X)" Click="ExitMenuClick"/>
             </MenuItem>
@@ -31,7 +33,7 @@
             <!-- 左側 -->
             <DockPanel>
                 <TextBlock Text="既存タイトル" DockPanel.Dock="Top" Margin="4"/>
-                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" Margin="1" SelectionChanged="titleListView_SelectionChanged">
+                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" Margin="1" SelectionChanged="TitleListViewSelectionChanged">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="タイトル" DisplayMemberBinding="{Binding Title}"/>
