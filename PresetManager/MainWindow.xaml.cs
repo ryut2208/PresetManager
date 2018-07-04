@@ -187,5 +187,23 @@ namespace PresetManager
             selectedItem.Explain = ((TextBox)sender).Text;
             presets[selectedItemIndex] = selectedItem;
         }
+
+        /// <summary>
+        /// キャラ欄でEnterを押したとき。キャラを追加する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CharacterField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(selectedItem==null)
+            {
+                return;
+            }
+            if( e.Key == Key.Return)
+            {
+                selectedItem.Characters.Add(((TextBox)sender).Text);
+                ((TextBox)sender).Clear();
+            }
+        }
     }
 }
