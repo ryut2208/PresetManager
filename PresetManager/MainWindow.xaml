@@ -46,11 +46,11 @@
             <DockPanel Grid.Column="2">
                 <DockPanel DockPanel.Dock="Top">
                     <TextBlock Text="タイトル" Margin="4"/>
-                    <TextBox x:Name="TitleField" Text="タイトル入力欄" Margin="4"/>
+                    <TextBox x:Name="TitleField" Text="タイトル入力欄" Margin="4" TextChanged="TitleField_TextChanged"/>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <TextBlock Text="説明" Margin="4"/>
-                    <TextBox x:Name="ExplainField" Text="説明入力欄" Margin="4"/>
+                    <TextBox x:Name="ExplainField" Text="説明入力欄" Margin="4" TextChanged="ExplainField_TextChanged" />
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <TextBlock Text="キャラ" Margin="4"/>

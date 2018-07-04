@@ -29,6 +29,14 @@ namespace PresetManager
         ///  読み込んだファイルのパス
         /// </summary>
         private string filePath;
+        /// <summary>
+        /// タイトル一覧で選択されたタイトル
+        /// </summary>
+        private Model.Preset selectedItem;
+        /// <summary>
+        /// タイトル一覧で選択されたタイトルのインデックス
+        /// </summary>
+        private int selectedItemIndex;
 
         public MainWindow()
         {
@@ -101,8 +109,17 @@ namespace PresetManager
         private void TitleListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var item = (Model.Preset)titleListView.SelectedItem;
+            if(item == null)
+            {
+                return;
+            }
+            // 選択項目を保持する
+            selectedItem = item;
+            selectedItemIndex = titleListView.SelectedIndex;
+
             TitleField.Text = item.Title;
             ExplainField.Text = item.Explain;
+            // TODO:キャラクターを表示する
         }
 
         /// <summary>
@@ -138,6 +155,37 @@ namespace PresetManager
                 var jsonStr = Encoding.UTF8.GetString(memoryStream.ToArray());
                 File.WriteAllText(filePath, jsonStr);
             }
+        }
+
+        /// <summary>
+        /// タイトル欄が変更されたとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TitleField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(selectedItem == null)
+            {
+                return;
+            }
+            selectedItem.Title = ((TextBox)sender).Text;
+            presets.RemoveAt(selectedItemIndex);
+            presets.Insert(selectedItemIndex, selectedItem);
+        }
+
+        /// <summary>
+        /// 説明欄が変更されたとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExplainField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(selectedItem==null)
+            {
+                return;
+            }
+            selectedItem.Explain = ((TextBox)sender).Text;
+            presets[selectedItemIndex] = selectedItem;
         }
     }
 }
