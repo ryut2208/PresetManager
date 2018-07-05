@@ -245,5 +245,17 @@ namespace PresetManager
             selectedCharacterIndex = CharacterListView.SelectedIndex;
             CharacterField.Text = item;
         }
+
+        /// <summary>
+        /// タイトル選択のコンテキストメニューで削除を選択したとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteTitleMenu_Click(object sender, RoutedEventArgs e)
+        {
+            presets.RemoveAt(selectedTitleIndex);
+            selectedTitle = null;
+            selectedTitleIndex = -1;
+        }
     }
 }
