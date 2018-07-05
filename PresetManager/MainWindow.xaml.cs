@@ -37,6 +37,8 @@ namespace PresetManager
         /// タイトル一覧で選択されたタイトルのインデックス
         /// </summary>
         private int selectedTitleIndex;
+        private String selectedCharacter;
+        private int selectedCharacterIndex;
 
         public MainWindow()
         {
@@ -119,7 +121,14 @@ namespace PresetManager
 
             TitleField.Text = item.Title;
             ExplainField.Text = item.Explain;
-            // TODO:キャラクターを表示する
+            CharacterField.Clear();
+            
+            // キャラクターの表示
+            CharacterListView.Items.Clear();
+            foreach(var character in item.Characters)
+            {
+                CharacterListView.Items.Add(character);
+            }
         }
 
         /// <summary>
@@ -168,6 +177,7 @@ namespace PresetManager
             {
                 return;
             }
+            selectedTitle.Title = ((TextBox)sender).Text;
             presets.RemoveAt(selectedTitleIndex);
             presets.Insert(selectedTitleIndex, selectedTitle);
         }
@@ -198,11 +208,42 @@ namespace PresetManager
             {
                 return;
             }
-            if( e.Key == Key.Return)
+            if(e.Key == Key.Return)
             {
-                selectedItem.Characters.Add(((TextBox)sender).Text);
+                var fieldText = ((TextBox)sender).Text;
+                if (!String.IsNullOrEmpty(selectedCharacter))
+                {
+                    // 選択されたキャラがある場合は編集
+                    selectedTitle.Characters.RemoveAt(selectedCharacterIndex);
+                    selectedTitle.Characters.Insert(selectedCharacterIndex, fieldText);
+                    CharacterListView.Items[selectedCharacterIndex] = fieldText;
+                    selectedCharacter = null;
+                    selectedCharacterIndex = -1;
+                }
+                else
+                {
+                    selectedTitle.Characters.Add(fieldText);
+                    CharacterListView.Items.Add(fieldText);
+                }
                 ((TextBox)sender).Clear();
             }
+        }
+
+        /// <summary>
+        /// キャラを選択したとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CharacterListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = (string)CharacterListView.SelectedItem;
+            if(item == null)
+            {
+                return;
+            }
+            selectedCharacter = item;
+            selectedCharacterIndex = CharacterListView.SelectedIndex;
+            CharacterField.Text = item;
         }
     }
 }

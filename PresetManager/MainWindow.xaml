@@ -56,11 +56,7 @@
                     <TextBlock Text="キャラ" Margin="4"/>
                     <TextBox x:Name="CharacterField" Text="キャラ入力欄" Margin="4" KeyDown="CharacterField_KeyDown"/>
                 </DockPanel>
-                <ListView x:Name="CharacterListView" Margin="1" ItemsSource="{Binding Mode=OneWay}">
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView>
+                <ListView x:Name="CharacterListView" Margin="1" SelectionChanged="CharacterListView_SelectionChanged"/>
             </DockPanel>
         </Grid>
     </Grid>
