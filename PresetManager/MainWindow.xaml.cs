@@ -32,11 +32,11 @@ namespace PresetManager
         /// <summary>
         /// タイトル一覧で選択されたタイトル
         /// </summary>
-        private Model.Preset selectedItem;
+        private Model.Preset selectedTitle;
         /// <summary>
         /// タイトル一覧で選択されたタイトルのインデックス
         /// </summary>
-        private int selectedItemIndex;
+        private int selectedTitleIndex;
 
         public MainWindow()
         {
@@ -114,8 +114,8 @@ namespace PresetManager
                 return;
             }
             // 選択項目を保持する
-            selectedItem = item;
-            selectedItemIndex = titleListView.SelectedIndex;
+            selectedTitle = item;
+            selectedTitleIndex = titleListView.SelectedIndex;
 
             TitleField.Text = item.Title;
             ExplainField.Text = item.Explain;
@@ -164,13 +164,12 @@ namespace PresetManager
         /// <param name="e"></param>
         private void TitleField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(selectedItem == null)
+            if(selectedTitle == null)
             {
                 return;
             }
-            selectedItem.Title = ((TextBox)sender).Text;
-            presets.RemoveAt(selectedItemIndex);
-            presets.Insert(selectedItemIndex, selectedItem);
+            presets.RemoveAt(selectedTitleIndex);
+            presets.Insert(selectedTitleIndex, selectedTitle);
         }
 
         /// <summary>
@@ -180,12 +179,12 @@ namespace PresetManager
         /// <param name="e"></param>
         private void ExplainField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(selectedItem==null)
+            if(selectedTitle==null)
             {
                 return;
             }
-            selectedItem.Explain = ((TextBox)sender).Text;
-            presets[selectedItemIndex] = selectedItem;
+            selectedTitle.Explain = ((TextBox)sender).Text;
+            presets[selectedTitleIndex] = selectedTitle;
         }
 
         /// <summary>
@@ -195,7 +194,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void CharacterField_KeyDown(object sender, KeyEventArgs e)
         {
-            if(selectedItem==null)
+            if(selectedTitle==null)
             {
                 return;
             }
