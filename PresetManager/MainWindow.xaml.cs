@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.Serialization.Json;
-using System.IO;
 
 namespace PresetManager
 {
@@ -82,7 +73,7 @@ namespace PresetManager
 
             if (presets == null) { return; }
 
-            foreach(var preset in presets)
+            foreach (var preset in presets)
             {
                 titleListView.Items.Add(preset.Title);
             }
@@ -130,7 +121,7 @@ namespace PresetManager
         private void TitleListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var index = titleListView.SelectedIndex;
-            if(index <0)
+            if (index < 0)
             {
                 return;
             }
@@ -141,10 +132,10 @@ namespace PresetManager
             TitleField.Text = selectedTitle.Title;
             ExplainField.Text = selectedTitle.Explain;
             CharacterField.Clear();
-            
+
             // キャラクターの表示
             CharacterListView.Items.Clear();
-            foreach(var character in selectedTitle.Characters)
+            foreach (var character in selectedTitle.Characters)
             {
                 CharacterListView.Items.Add(character);
             }
@@ -194,7 +185,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void TitleField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(selectedTitle == null)
+            if (selectedTitle == null)
             {
                 return;
             }
@@ -203,7 +194,7 @@ namespace PresetManager
             presets.RemoveAt(selectedTitleIndex);
             presets.Insert(selectedTitleIndex, selectedTitle);
             titleListView.Items.RemoveAt(selectedTitleIndex);
-            titleListView.Items.Insert(selectedTitleIndex,title);
+            titleListView.Items.Insert(selectedTitleIndex, title);
         }
 
         /// <summary>
@@ -213,7 +204,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void ExplainField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(selectedTitle==null)
+            if (selectedTitle == null)
             {
                 return;
             }
@@ -228,11 +219,11 @@ namespace PresetManager
         /// <param name="e"></param>
         private void CharacterField_KeyDown(object sender, KeyEventArgs e)
         {
-            if(selectedTitle==null)
+            if (selectedTitle == null)
             {
                 return;
             }
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 var fieldText = ((TextBox)sender).Text;
                 if (!String.IsNullOrEmpty(selectedCharacter))
@@ -261,7 +252,7 @@ namespace PresetManager
         private void CharacterListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var item = (string)CharacterListView.SelectedItem;
-            if(item == null)
+            if (item == null)
             {
                 return;
             }
