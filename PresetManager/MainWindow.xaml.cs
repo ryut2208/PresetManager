@@ -106,8 +106,7 @@ namespace PresetManager
                     presets = (List<Model.Preset>)serializer.ReadObject(memoryStream);
                 }
             }
-            // TODO: ソート出来るようにする
-            // presets.Sort((lhs, rhs) => lhs.Title.CompareTo(rhs.Title));
+            presets.Sort((lhs, rhs) => lhs.Title.CompareTo(rhs.Title));
             // 読み込んだデータを反映させる
             titleListView.DataContext = presets;
         }
