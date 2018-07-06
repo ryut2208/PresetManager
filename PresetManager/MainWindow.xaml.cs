@@ -67,6 +67,8 @@ namespace PresetManager
                 this.IsEnabled = true;
             }
 
+            if (presets == null) { return; }
+
             foreach(var preset in presets)
             {
                 titleListView.Items.Add(preset.Title);
