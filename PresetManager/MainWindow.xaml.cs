@@ -198,9 +198,12 @@ namespace PresetManager
             {
                 return;
             }
-            selectedTitle.Title = ((TextBox)sender).Text;
+            var title = ((TextBox)sender).Text;
+            selectedTitle.Title = title;
             presets.RemoveAt(selectedTitleIndex);
             presets.Insert(selectedTitleIndex, selectedTitle);
+            titleListView.Items.RemoveAt(selectedTitleIndex);
+            titleListView.Items.Insert(selectedTitleIndex,title);
         }
 
         /// <summary>
