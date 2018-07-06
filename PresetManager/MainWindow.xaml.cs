@@ -40,9 +40,21 @@ namespace PresetManager
         private String selectedCharacter;
         private int selectedCharacterIndex;
 
+        public static readonly RoutedCommand openCommand = new RoutedCommand("OpenCommand", typeof(MainWindow));
+        public static readonly RoutedCommand newTitleCommand = new RoutedCommand("newTitleCommand", typeof(MainWindow));
+        public static readonly RoutedCommand overwriteCommand = new RoutedCommand("overwriteCommand", typeof(MainWindow));
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // ショートカットの設定
+            var openCommandBinding = new CommandBinding(openCommand, OpenMenuClick);
+            var newTitleCommandBinding = new CommandBinding(newTitleCommand, NewTitleMenuClick);
+            var overwriteCommandBinding = new CommandBinding(overwriteCommand, OverwriteMenuClick);
+            CommandBindings.Add(openCommandBinding);
+            CommandBindings.Add(newTitleCommandBinding);
+            CommandBindings.Add(overwriteCommandBinding);
         }
 
         /// <summary>

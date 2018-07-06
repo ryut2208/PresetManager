@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:PresetManager"
         mc:Ignorable="d"
         Title="PresetManager" Height="600" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Command="{x:Static local:MainWindow.openCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{x:Static local:MainWindow.newTitleCommand}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{x:Static local:MainWindow.overwriteCommand}" Gesture="Ctrl+S"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,11 +20,11 @@
         <!-- メニュー -->
         <Menu>
             <MenuItem Header="ファイル(_F)">
-                <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="OpenMenuClick"/>
-                <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)" Click="OverwriteMenuClick"/>
+                <MenuItem x:Name="openMenu" Header="開く(_O)..." Click="OpenMenuClick" InputGestureText="Ctrl+O"/>
+                <MenuItem x:Name="overwriteMenu" Header="上書き保存(_S)" Click="OverwriteMenuClick" Command="{Binding OverwriteCommand}" InputGestureText="Ctrl+S"/>
                 <MenuItem x:Name="saveMenu" Header="名前をつけて保存(_A)..." IsEnabled="False"/>
                 <Separator/>
-                <MenuItem x:Name="newTitleMenu" Header="新規タイトル追加" Click="NewTitleMenuClick"/>
+                <MenuItem x:Name="newTitleMenu" Header="新規タイトル追加" Click="NewTitleMenuClick" Command="{Binding NewTitleCOmmand}" InputGestureText="Ctrl+N"/>
                 <Separator/>
                 <MenuItem x:Name="exitMenu" Header="終了(_X)" Click="ExitMenuClick"/>
             </MenuItem>
