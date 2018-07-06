@@ -24,7 +24,7 @@ namespace PresetManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Model.Preset> presets;
+        List<Model.Preset> presets;
         /// <summary>
         ///  読み込んだファイルのパス
         /// </summary>
@@ -66,6 +66,11 @@ namespace PresetManager
                 ReadJson(dialog.FileName);
                 this.IsEnabled = true;
             }
+
+            foreach(var preset in presets)
+            {
+                titleListView.Items.Add(preset.Title);
+            }
         }
 
         /// <summary>
@@ -83,8 +88,8 @@ namespace PresetManager
                 using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonStr)))
                 using (var streamReader = new StreamReader(memoryStream))
                 {
-                    var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Model.Preset>));
-                    presets = (ObservableCollection<Model.Preset>)serializer.ReadObject(memoryStream);
+                    var serializer = new DataContractJsonSerializer(typeof(List<Model.Preset>));
+                    presets = (List<Model.Preset>)serializer.ReadObject(memoryStream);
                 }
             }
             // TODO: ソート出来るようにする
@@ -110,22 +115,22 @@ namespace PresetManager
         /// <param name="e"></param>
         private void TitleListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (Model.Preset)titleListView.SelectedItem;
-            if(item == null)
+            var index = titleListView.SelectedIndex;
+            if(index <0)
             {
                 return;
             }
             // 選択項目を保持する
-            selectedTitle = item;
-            selectedTitleIndex = titleListView.SelectedIndex;
+            selectedTitle = presets[index];
+            selectedTitleIndex = index;
 
-            TitleField.Text = item.Title;
-            ExplainField.Text = item.Explain;
+            TitleField.Text = selectedTitle.Title;
+            ExplainField.Text = selectedTitle.Explain;
             CharacterField.Clear();
             
             // キャラクターの表示
             CharacterListView.Items.Clear();
-            foreach(var character in item.Characters)
+            foreach(var character in selectedTitle.Characters)
             {
                 CharacterListView.Items.Add(character);
             }
@@ -143,6 +148,8 @@ namespace PresetManager
                 return;
             }
             presets.Add(new Model.Preset());
+            titleListView.Items.Add("");
+            titleListView.ScrollIntoView(presets.Last().Title);
         }
 
         /// <summary>
@@ -159,7 +166,7 @@ namespace PresetManager
             using (var memoryStream = new MemoryStream())
             using (var streamReader = new StreamReader(memoryStream))
             {
-                var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Model.Preset>));
+                var serializer = new DataContractJsonSerializer(typeof(List<Model.Preset>));
                 serializer.WriteObject(memoryStream, presets);
                 var jsonStr = Encoding.UTF8.GetString(memoryStream.ToArray());
                 File.WriteAllText(filePath, jsonStr);
@@ -254,6 +261,7 @@ namespace PresetManager
         private void DeleteTitleMenu_Click(object sender, RoutedEventArgs e)
         {
             presets.RemoveAt(selectedTitleIndex);
+            titleListView.Items.RemoveAt(selectedTitleIndex);
             selectedTitle = null;
             selectedTitleIndex = -1;
         }

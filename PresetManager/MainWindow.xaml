@@ -33,17 +33,12 @@
             <!-- 左側 -->
             <DockPanel>
                 <TextBlock Text="既存タイトル" DockPanel.Dock="Top" Margin="4"/>
-                <ListView x:Name="titleListView" ItemsSource="{Binding Mode=OneWay}" Margin="1" SelectionChanged="TitleListViewSelectionChanged" SelectionMode="Single">
+                <ListView x:Name="titleListView" Margin="1" SelectionChanged="TitleListViewSelectionChanged" SelectionMode="Single">
                     <ListView.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="deleteTitleMenu" Header="削除" Click="DeleteTitleMenu_Click"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="タイトル" DisplayMemberBinding="{Binding Title}"/>
-                        </GridView>
-                    </ListView.View>
                 </ListView>
             </DockPanel>
 
