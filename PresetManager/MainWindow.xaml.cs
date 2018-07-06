@@ -64,6 +64,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void OpenMenuClick(object sender, RoutedEventArgs e)
         {
+            titleListView.Items.Clear();
             // ダイアログを開く
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
