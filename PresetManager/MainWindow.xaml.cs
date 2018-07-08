@@ -296,7 +296,7 @@ namespace PresetManager
         }
 
         /// <summary>
-        /// タイトル選択のコンテキストメニューで削除を選択したとき
+        /// タイトル一覧のコンテキストメニューで削除を選択したとき
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -306,6 +306,19 @@ namespace PresetManager
             titleListView.Items.RemoveAt(selectedTitleIndex);
             selectedTitle = null;
             selectedTitleIndex = -1;
+        }
+
+        /// <summary>
+        /// タイトル一覧のコンテキストメニューでコピーを選択したとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CopyTitleMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var baseTitle = presets[selectedTitleIndex];
+            baseTitle.Title = baseTitle.Title + " コピー";
+            presets.Add(baseTitle);
+            titleListView.Items.Add(baseTitle.Title);
         }
 
         /// <summary>

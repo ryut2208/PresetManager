@@ -42,6 +42,7 @@
                     <ListView.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="deleteTitleMenu" Header="削除" Click="DeleteTitleMenu_Click"/>
+                            <MenuItem x:Name="copyTitleMenu" Header="コピー" Click="CopyTitleMenu_Click"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
                 </ListView>
