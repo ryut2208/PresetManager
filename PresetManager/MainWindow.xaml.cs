@@ -73,6 +73,9 @@ namespace PresetManager
 
             if (presets == null) { return; }
 
+            // タイトルバーに開いているファイル名を設定する
+            Title = dialog.SafeFileName + " - PresetManager";
+
             foreach (var preset in presets)
             {
                 titleListView.Items.Add(preset.Title);
