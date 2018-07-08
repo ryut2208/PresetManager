@@ -241,6 +241,7 @@ namespace PresetManager
                     CharacterListView.Items.Add(fieldText);
                 }
                 ((TextBox)sender).Clear();
+                CharacterListView.ScrollIntoView(fieldText);
             }
         }
 
