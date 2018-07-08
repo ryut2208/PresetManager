@@ -28,11 +28,27 @@ namespace PresetManager
         /// タイトル一覧で選択されたタイトルのインデックス
         /// </summary>
         private int selectedTitleIndex;
+        /// <summary>
+        /// 選択したキャラ
+        /// </summary>
         private String selectedCharacter;
+        /// <summary>
+        /// 選択したキャラのインデックス
+        /// </summary>
         private int selectedCharacterIndex;
 
+        // コマンド群
+        /// <summary>
+        /// Ctrl+O ファイルを開く
+        /// </summary>
         public static readonly RoutedCommand openCommand = new RoutedCommand("OpenCommand", typeof(MainWindow));
+        /// <summary>
+        /// Ctrl+N 新規タイトル追加
+        /// </summary>
         public static readonly RoutedCommand newTitleCommand = new RoutedCommand("newTitleCommand", typeof(MainWindow));
+        /// <summary>
+        /// Ctrl+S 上書き保存
+        /// </summary>
         public static readonly RoutedCommand overwriteCommand = new RoutedCommand("overwriteCommand", typeof(MainWindow));
 
         public MainWindow()
@@ -66,12 +82,15 @@ namespace PresetManager
 
             if (dialog.ShowDialog() == true)
             {
-                this.IsEnabled = false;
+                IsEnabled = false;
                 ReadJson(dialog.FileName);
-                this.IsEnabled = true;
+                IsEnabled = true;
             }
 
-            if (presets == null) { return; }
+            if (presets == null)
+            {
+                return;
+            }
 
             // タイトルバーに開いているファイル名を設定する
             Title = dialog.SafeFileName + " - PresetManager";
@@ -118,7 +137,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void ExitMenuClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -172,7 +191,7 @@ namespace PresetManager
         /// <param name="e"></param>
         private void OverwriteMenuClick(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(this.filePath))
+            if (String.IsNullOrEmpty(filePath))
             {
                 return;
             }
