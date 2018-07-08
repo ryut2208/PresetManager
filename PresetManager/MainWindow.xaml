@@ -61,7 +61,13 @@
                     <TextBlock Text="キャラ" Margin="4"/>
                     <TextBox x:Name="CharacterField" Text="キャラ入力欄" Margin="4" KeyDown="CharacterField_KeyDown"/>
                 </DockPanel>
-                <ListView x:Name="CharacterListView" Margin="1" SelectionMode="Single" SelectionChanged="CharacterListView_SelectionChanged"/>
+                <ListView x:Name="CharacterListView" Margin="1" SelectionMode="Single" SelectionChanged="CharacterListView_SelectionChanged">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="deleteCharacterMenu" Header="削除" Click="DeleteCharacterMenu_Click"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
             </DockPanel>
         </Grid>
     </Grid>

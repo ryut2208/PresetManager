@@ -277,5 +277,24 @@ namespace PresetManager
             selectedTitle = null;
             selectedTitleIndex = -1;
         }
+
+        /// <summary>
+        /// キャラクター一覧のコンテキストメニューで削除を選択したとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteCharacterMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (string)CharacterListView.SelectedItem;
+            if (item == null)
+            {
+                return;
+            }
+            selectedTitle.Characters.Remove(item);
+            CharacterListView.Items.Remove(item);
+            CharacterField.Clear();
+            selectedCharacter = null;
+            selectedCharacterIndex = -1;
+        }
     }
 }
