@@ -76,6 +76,11 @@ namespace PresetManager
             // タイトルバーに開いているファイル名を設定する
             Title = dialog.SafeFileName + " - PresetManager";
 
+            // TextBoxをクリアする
+            TitleField.Clear();
+            ExplainField.Clear();
+            CharacterField.Clear();
+
             foreach (var preset in presets)
             {
                 titleListView.Items.Add(preset.Title);
