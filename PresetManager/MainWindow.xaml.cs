@@ -72,6 +72,12 @@ namespace PresetManager
         private void OpenMenuClick(object sender, RoutedEventArgs e)
         {
             titleListView.Items.Clear();
+
+            selectedTitle = null;
+            selectedTitleIndex = -1;
+            selectedCharacter = null;
+            selectedTitleIndex = -1;
+
             // ダイアログを開く
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
